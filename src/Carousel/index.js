@@ -60,17 +60,17 @@ const Carousel = ({ children }) => {
   const [currentChildIndex, setCurrentChildIndex] = useState(0);
 
   const childrenInView = 2;
-  const marginRight = 15;
+  const lasChildInView = currentChildIndex >= children.length - childrenInView;
 
   const handlePrev = () => {
     if (left > 0) {
-      setLeft(left - childWidth + marginRight);
+      setLeft(left - (childWidth + marginRight));
       setCurrentChildIndex(currentChildIndex - 1);
     }
   };
 
   const handleNext = () => {
-    if (currentChildIndex < children.length - childrenInView) {
+    if (!lasChildInView) {
       setLeft(left + childWidth + marginRight);
       setCurrentChildIndex(currentChildIndex + 1);
     }
@@ -88,8 +88,8 @@ const Carousel = ({ children }) => {
       <CarouselWrapper id="carousel" left={left}>
         {children}
       </CarouselWrapper>
-      <Prev onClick={handlePrev}>{"<"}</Prev>
-      <Next onClick={handleNext}>{">"}</Next>
+      {left > 0 && <Prev onClick={handlePrev}>{"<"}</Prev>}
+      {!lasChildInView && <Next onClick={handleNext}>{">"}</Next>}
     </CarouselContainer>
   );
 };
