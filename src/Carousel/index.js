@@ -56,10 +56,10 @@ const Next = styled.div`
 
 const Carousel = ({ children }) => {
   const [left, setLeft] = useState(0);
+  const [childWidth, setChildWidth] = useState(0);
   const [currentChildIndex, setCurrentChildIndex] = useState(0);
 
-  const childrenInView = 3;
-  const childWidth = 540;
+  const childrenInView = 2;
   const marginRight = 15;
 
   const handlePrev = () => {
@@ -76,11 +76,18 @@ const Carousel = ({ children }) => {
     }
   };
 
-  useEffect(() => {}, [left]);
+  useEffect(() => {
+    const firstChild = document.getElementById("carousel").childNodes[0];
+    if (firstChild) {
+      setChildWidth(firstChild.clientWidth);
+    }
+  }, [left]);
 
   return (
     <CarouselContainer>
-      <CarouselWrapper left={left}>{children}</CarouselWrapper>
+      <CarouselWrapper id="carousel" left={left}>
+        {children}
+      </CarouselWrapper>
       <Prev onClick={handlePrev}>{"<"}</Prev>
       <Next onClick={handleNext}>{">"}</Next>
     </CarouselContainer>
