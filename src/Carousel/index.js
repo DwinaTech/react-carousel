@@ -32,7 +32,8 @@ const Prev = styled.div`
   z-index: 10;
   width: 40px;
   height: 240px;
-  background-color: rgb(255, 255, 255, 0.3);
+  background-color: rgb(216, 9, 171, 0.3);
+  color: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -47,19 +48,19 @@ const Next = styled.div`
   z-index: 10;
   width: 40px;
   height: 240px;
-  background-color: rgb(255, 255, 255, 0.3);
+  color: #ffffff;
+  background-color: rgb(216, 9, 171, 0.3);
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
 `;
 
-const Carousel = ({ children }) => {
+const Carousel = ({ children, childrenInView = 1 }) => {
   const [left, setLeft] = useState(0);
   const [childWidth, setChildWidth] = useState(0);
   const [currentChildIndex, setCurrentChildIndex] = useState(0);
 
-  const childrenInView = 2;
   const lasChildInView = currentChildIndex >= children.length - childrenInView;
 
   const handlePrev = () => {

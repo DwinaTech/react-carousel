@@ -4,7 +4,7 @@ import { promos } from "./static-data";
 import Carousel from "../Carousel";
 
 const PromoWrapper = styled.div`
-  width: 540px;
+  width: 240px;
   height: 240px;
   background: gray;
   color: #fff;
