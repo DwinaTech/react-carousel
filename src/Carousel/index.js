@@ -12,7 +12,7 @@ const CarouselContainer = styled.div`
 const CarouselWrapper = styled.div`
   display: flex;
   position: absolute;
-  transition: left 0.5s ease-in-out;
+  transition: left 0.3s ease-in-out;
   top: 0;
   left: -${({ left }) => left}px;
   bottom: 0;
