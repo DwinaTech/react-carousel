@@ -31,7 +31,7 @@ const Prev = styled.div`
   font-size: 35px;
   z-index: 10;
   width: 40px;
-  height: 240px;
+  height: ${({ height }) => height}px;
   background-color: rgb(216, 9, 171, 0.3);
   color: #ffffff;
   display: flex;
@@ -47,7 +47,7 @@ const Next = styled.div`
   right: 0;
   z-index: 10;
   width: 40px;
-  height: 240px;
+  height: ${({ height }) => height}px;
   color: #ffffff;
   background-color: rgb(216, 9, 171, 0.3);
   display: flex;
@@ -56,12 +56,14 @@ const Next = styled.div`
   cursor: pointer;
 `;
 
-const Carousel = ({ children, childrenInView = 1 }) => {
+const Carousel = ({ children, childrenInFullView = 5 }) => {
   const [left, setLeft] = useState(0);
   const [childWidth, setChildWidth] = useState(0);
+  const [childHeight, setChildHeight] = useState(0);
   const [currentChildIndex, setCurrentChildIndex] = useState(0);
 
-  const lasChildInView = currentChildIndex >= children.length - childrenInView;
+  const lasChildInView =
+    currentChildIndex >= children.length - childrenInFullView;
 
   const handlePrev = () => {
     if (left > 0) {
@@ -81,6 +83,7 @@ const Carousel = ({ children, childrenInView = 1 }) => {
     const firstChild = document.getElementById("carousel").childNodes[0];
     if (firstChild) {
       setChildWidth(firstChild.clientWidth);
+      setChildHeight(firstChild.clientHeight);
     }
   }, [left]);
 
@@ -89,8 +92,16 @@ const Carousel = ({ children, childrenInView = 1 }) => {
       <CarouselWrapper id="carousel" left={left}>
         {children}
       </CarouselWrapper>
-      {left > 0 && <Prev onClick={handlePrev}>{"<"}</Prev>}
-      {!lasChildInView && <Next onClick={handleNext}>{">"}</Next>}
+      {left > 0 && (
+        <Prev height={childHeight} onClick={handlePrev}>
+          {"<"}
+        </Prev>
+      )}
+      {!lasChildInView && (
+        <Next height={childHeight} onClick={handleNext}>
+          {">"}
+        </Next>
+      )}
     </CarouselContainer>
   );
 };
