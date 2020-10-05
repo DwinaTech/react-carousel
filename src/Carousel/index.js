@@ -56,7 +56,7 @@ const Next = styled.div`
   cursor: pointer;
 `;
 
-const Carousel = ({ children, childrenInFullView = 5 }) => {
+const Carousel = ({ children, childrenInFullView = 1 }) => {
   const [left, setLeft] = useState(0);
   const [childWidth, setChildWidth] = useState(0);
   const [childHeight, setChildHeight] = useState(0);
